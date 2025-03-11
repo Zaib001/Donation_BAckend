@@ -26,22 +26,22 @@ exports.registerAdmin = async (req, res) => {
 
 exports.login = async (req, res) => {
     try {
-        console.log("Login Request Received:", req.body); // Debug Log
+    
 
         const { email, password } = req.body;
         const user = await User.findOne({ email });
 
         if (!user) {
-            console.log("User Not Found:", email);
+          
             return res.status(401).json({ success: false, message: "Invalid email or password" });
         }
         const isPasswordMatch = await user.matchPassword(password);
         if (!isPasswordMatch) {
-            console.log("Password Mismatch for:", email);
+           
             return res.status(401).json({ success: false, message: "Invalid email or password" });
         }
 
-        console.log("Login Successful for:", email);
+      
         res.status(200).json({
             success: true,
             message: "Login successful",
