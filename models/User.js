@@ -6,7 +6,7 @@ const UserSchema = new mongoose.Schema({
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     whatsapp: { type: String },
-    role: { type: String, enum: ['admin', 'volunteer', 'donor'], default: 'donor' },
+    role: { type: String, enum: ['admin', 'volunteer', 'donor'], default: 'admin' },
 }, { timestamps: true });
 
 UserSchema.methods.matchPassword = async function (enteredPassword) {
