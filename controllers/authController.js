@@ -115,3 +115,11 @@ exports.getAllUsers = async (req, res) => {
         res.status(500).json({ msg: 'Failed to retrieve users', error: err.message });
     }
 };
+exports.getAllVolunteers = async (req, res) => {
+    try {
+        const volunteers = await User.find({ role: 'volunteer' }).select('-password');
+        res.status(200).json({ success: true, volunteers });
+    } catch (error) {
+        res.status(500).json({ success: false, message: 'Failed to fetch volunteers', error: error.message });
+    }
+};
