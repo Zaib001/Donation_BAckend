@@ -1,6 +1,7 @@
 const Volunteer = require('../models/Volunteer');
 const Donation = require('../models/Donation');
 const Offer = require("../models/Offer");
+const User = require('../models/User');
 
 
 const PDFDocument = require("pdfkit");
