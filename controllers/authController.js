@@ -8,7 +8,7 @@ require('dotenv').config();
 // @access Super Admin
 exports.registerAdmin = async (req, res) => {
 
-    const { name, email, password, role } = req.body;
+    const { name, email, password, role,  whatsapp } = req.body;
     try {
         const existingUser = await User.findOne({ email });
         if (existingUser) {
@@ -16,7 +16,7 @@ exports.registerAdmin = async (req, res) => {
         }
 
         const hashedPassword = await bcrypt.hash(password, 10);
-        const user = await User.create({ name, email, password: hashedPassword, role });
+        const user = await User.create({ name, email, password: hashedPassword, role,whatsapp });
 
         res.status(201).json({ msg: 'User registered successfully', user });
     } catch (err) {
