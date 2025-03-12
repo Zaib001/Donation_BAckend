@@ -77,10 +77,14 @@ exports.addVolunteer = async (req, res) => {
 // @access Admin
 exports.getVolunteers = async (req, res) => {
     try {
-        const volunteers = await Volunteer.find().sort({ createdAt: -1 });
-        res.status(200).json({ success: true, volunteers });
-    } catch (error) {
-        res.status(500).json({ success: false, message: "Internal Server Error", error: error.message });
+        // Find users with the role of "volunteer" and exclude the password field
+        const volunteers = await User.find({ role: 'volunteer' }).select('-password');
+        
+        // Return the list of volunteers
+        res.status(200).json({ success: true, data: volunteers });
+    } catch (err) {
+        // Handle errors
+        res.status(500).json({ success: false, msg: 'Failed to retrieve volunteers', error: err.message });
     }
 };
 
